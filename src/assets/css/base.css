@@ -1,0 +1,81 @@
+@import "./normalize.css";
+
+:root {
+  --color-hover: rgb(200, 200, 200);
+  --font-size: 14px;
+  --line-height: 1.5;
+}
+
+li {
+  list-style: none;
+}
+
+.container {
+  padding-right:0 !important;
+  padding-left: 0 !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+
+a {
+  color: #505050 !important;
+}
+
+a:hover {
+  text-decoration: none !important;
+  color: var(--color-hover) !important;
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?h3qn5');
+  src:  url('fonts/icomoon.eot?h3qn5#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?h3qn5') format('truetype'),
+    url('fonts/icomoon.woff?h3qn5') format('woff'),
+    url('fonts/icomoon.svg?h3qn5#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "微軟正黑體", 'Open Sans', "新細明體", Arial, Helvetica, sans-serif !important;
+  -webkit-tap-highlight-color: transparent; 
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+
+.clear-fix::after {
+  clear: both;
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+
+.clear-fix {
+  zoom: 1;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}

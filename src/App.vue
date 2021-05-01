@@ -1,32 +1,25 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <nav-bar />
+    <keep-alive exclude="GoodsInfo"><router-view></router-view></keep-alive>
+    <top-icon />
+    <nav-bottom />
   </div>
 </template>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+<script>
+//components
+import NavBar from "components/content/navbar/NavBar.vue";
+import NavBottom from "./components/content/footer/NavBottom";
+import TopIcon from "./components/content/topicon/TopIcon.vue";
+export default {
+  name: "App",
+  components: {
+    NavBar,
+    NavBottom,
+    TopIcon,
+  },
+};
+</script>
+<style scoped>
+@import "assets/css/base.css";
 </style>
