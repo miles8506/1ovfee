@@ -14,6 +14,9 @@
   </div>
 </template>
 <script>
+//JS
+import { move } from "assets/js/movetop.js";
+
 export default {
   name: "PageBar",
   data() {
@@ -37,11 +40,13 @@ export default {
   },
   methods: {
     goPage(index) {
+      const HTML = document.documentElement;
       if (index === this.currentIndex) return;
       else {
         this.currentIndex = index;
         this.$bus.$emit("page", index);
       }
+      move(HTML, 0);
     },
   },
 };

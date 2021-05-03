@@ -26,6 +26,10 @@ a:hover {
   color: var(--color-hover) !important;
 }
 
+input {
+  margin: 0;
+}
+
 @font-face {
   font-family: 'icomoon';
   src:  url('fonts/icomoon.eot?h3qn5');

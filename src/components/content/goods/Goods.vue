@@ -3,17 +3,16 @@
     <div class="container">
       <!-- 左側nav -->
       <nav class="nav_list" ref="navList">
-        <div class="nav_wrap">
-          <nav-side />
-        </div>
+        <nav-side />
       </nav>
       <!-- 右側商品項目 -->
       <div class="goods_item">
         <div class="goods" v-for="(item, index) in Goods" :key="index">
           <a
-            :href="'/new/' + goodsId"
             class="goods_wrap"
-            @click="goInfo(item.id)"
+            :href="'/new/' + goodsId"
+            @mouseover="getId(item.id)"
+            @click="goInfo()"
           >
             <img :src="item.img" alt="" class="goods_img" />
             <div class="goods_name">
@@ -74,69 +73,52 @@ export default {
     this.$bus.$off("page");
   },
   methods: {
-    //獲取相對應商品id，並將該page的data存到sesstion中
-    goInfo(iid) {
-      window.sessionStorage.removeItem("goodsInfo");
-      let data = JSON.stringify(this.Goods);
-      window.sessionStorage.setItem("goodsInfo", data);
+    getId(iid) {
       this.goodsId = iid;
+    },
+    //獲取相對應商品id
+    goInfo() {
+      event.preventDefault();
+      this.$store.commit("putGoodsList", this.Goods);
+      this.$router.push("/new/" + this.goodsId);
     },
   },
 };
 </script>
 <style scoped>
 .Goods {
-  padding: 50px 50px 0;
+  padding: 50px 70px 0;
 }
 
 .container {
   display: flex;
+  width: 100%;
+  height: 100%;
 }
 
 /* nav */
 .nav_list {
   position: relative;
-  flex: 25%;
+  flex: 20%;
   padding: 0 0 40px 30px;
-}
-
-.nav_wrap {
-  position: sticky;
-  top: 100px;
-}
-
-.nav_list .title {
-  font-size: 16px;
-}
-
-.first_activity div,
-.sort div {
-  padding: 8px 0;
-  font-size: 12px;
-  color: #505050;
-}
-
-.sort {
-  margin-top: 20px;
 }
 
 /* goods */
 .goods_item {
   display: flex;
-  flex: 75%;
+  flex: 80%;
   flex-wrap: wrap;
 }
 
 .goods_item .goods {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   flex: 25%;
   height: 350px;
 }
 
 .goods_wrap {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   height: 100%;
 }
@@ -182,3 +164,4 @@ export default {
   color: #999;
 }
 </style>
+            

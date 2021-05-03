@@ -19,7 +19,7 @@ export default {
   name: "NavBar",
   data() {
     return {
-      navItem: ["本週新品", "熱銷現貨", "人氣預定"],
+      navItem: ["首頁", "本週新品", "熱銷現貨", "人氣預定"],
       logoURL: "https://www.lovfee.com/images/logo/logo.jpg",
       offsetY: 0,
     };

@@ -10,7 +10,7 @@
         <a href=""><span class="img"></span>Login</a>
       </div>
       <div class="cart">
-        <a href=""><span class="img"></span>Cart</a>
+        <a href="/cart" @click="goCart"><span class="img"></span>Cart</a>
       </div>
     </div>
   </div>
@@ -32,6 +32,15 @@ export default {
       } else {
         $(this.$refs.service).show();
       }
+    },
+  },
+  methods: {
+    //前往購物車page
+    goCart() {
+      event.preventDefault();
+      // if () {
+      this.$router.push("/cart");
+      // }
     },
   },
 };
@@ -88,6 +97,7 @@ export default {
   height: 100%;
   padding: 0 20px;
   color: #fff !important;
+  text-decoration: none;
 }
 
 .login a .img,

@@ -2,7 +2,7 @@
   <div>
     <ul class="item_wrap">
       <li v-for="(item, index) in navItem" :key="index">
-        <a :href="pathURL" @click="goNext(index)">{{ item }}</a>
+        <a :href="pathURL[index]" @click="goNext(index)">{{ item }}</a>
       </li>
       <li class="search"><input type="text" placeholder="Search" /></li>
     </ul>
@@ -13,7 +13,7 @@ export default {
   name: "NavItem",
   data() {
     return {
-      pathURL: "",
+      pathURL: ["/home", "/new", "/hot", "/popular"],
     };
   },
   props: {
@@ -27,16 +27,20 @@ export default {
   methods: {
     // 判斷相對應URL
     goNext(index) {
+      event.preventDefault();
       switch (index) {
         case 0:
-          this.pathURL = "/new";
-          console.log(index);
+          this.$router.push("/home");
           break;
         case 1:
-          this.pathURL = "/hot";
+          this.$router.push("/new");
           break;
         case 2:
-          this.pathURL = "/popular";
+          this.$router.push("/hot");
+          break;
+        case 3:
+          this.$router.push("/popular");
+          break;
       }
     },
   },
@@ -62,6 +66,7 @@ export default {
   display: inline-block;
   width: 100%;
   height: 100%;
+  text-decoration: none;
 }
 
 .item_wrap li:hover a {
