@@ -1,11 +1,13 @@
 <template>
   <div class="cart">
     <cart-list :cartList="cartList" />
+    <cart-computed />
   </div>
 </template>
 <script>
 //components
 import CartList from "./cartchild/CartList";
+import CartComputed from "./cartchild/CartComputed";
 
 export default {
   name: "Cart",
@@ -16,10 +18,10 @@ export default {
   },
   components: {
     CartList,
+    CartComputed,
   },
   created() {
     this.cartList = this.$store.state.cartList;
-    console.log(this.cartList);
   },
 };
 </script>

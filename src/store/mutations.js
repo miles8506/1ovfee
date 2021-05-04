@@ -3,8 +3,7 @@ export default {
     state.goodsList = data;
   },
   putCart(state, data) {
-    let res = null;
-    res = state.cartList.filter(item => {
+    let res = state.cartList.filter(item => {
       return item.id === data.id && item.goodsSize === data.goodsSize;
     })
     if (res.length !== 0) {
@@ -14,5 +13,5 @@ export default {
       goods.count++;
     }
     state.cartList.push(data);
-  }
+  },
 }

@@ -7,12 +7,6 @@
     >
       <!-- Wrapper for slides -->
       <div class="carousel-inner" role="listbox">
-        <!-- <div class="item active">
-          <img src="@/assets/img/dog.jpg" alt="..." />
-        </div>
-        <div class="item">
-          <img src="@/assets/img/dog.jpg" alt="..." />
-        </div> -->
         <div
           v-for="(item, index) in bannerImg"
           :key="index"

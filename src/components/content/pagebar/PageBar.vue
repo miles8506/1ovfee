@@ -46,7 +46,7 @@ export default {
         this.currentIndex = index;
         this.$bus.$emit("page", index);
       }
-      move(HTML, 0);
+      move(HTML, 20);
     },
   },
 };

@@ -130,6 +130,7 @@ export default {
       data.img = this.currentGoods.img;
       data.newPrice = this.currentGoods.newPrice;
       data.oldPrice = this.currentGoods.oldPrice;
+      data.status = true;
       this.$store.dispatch("putCart", data);
       this.$router.push("/cart");
     },
