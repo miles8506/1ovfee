@@ -2,6 +2,10 @@ const path = require('path');
 const webpack = require("webpack");
 const resolve = dir => path.join(__dirname, dir);
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/1lovfee/'
+    : '/',
+
   chainWebpack: config => {
     config.resolve.alias.set('@', resolve('src'))
       .set('components', resolve('src/components'))
@@ -20,5 +24,5 @@ module.exports = {
         Popper: ['popper.js', 'default']
       })
     ]
-  }
+  },
 };
