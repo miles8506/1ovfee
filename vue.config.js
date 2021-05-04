@@ -3,7 +3,7 @@ const webpack = require("webpack");
 const resolve = dir => path.join(__dirname, dir);
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/1lovfee/'
+    ? '/1ovfee/'
     : '/',
 
   chainWebpack: config => {
