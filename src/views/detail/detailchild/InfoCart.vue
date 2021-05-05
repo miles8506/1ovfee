@@ -131,6 +131,7 @@ export default {
       data.newPrice = this.currentGoods.newPrice;
       data.oldPrice = this.currentGoods.oldPrice;
       data.status = true;
+      data.sort = this.currentGoods.sort;
       this.$store.dispatch("putCart", data);
       this.$router.push("/cart");
     },
@@ -145,7 +146,7 @@ export default {
 
 .info_wrap {
   position: sticky;
-  top: 90px;
+  top: 130px;
 }
 
 /* title */

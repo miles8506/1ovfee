@@ -11,6 +11,7 @@ const Home = () => import('views/home/Home.vue');
 const New = () => import('views/new/New.vue');
 const GoodsInfo = () => import('views/detail/GoodsInfo.vue');
 const Cart = () => import('views/cart/Cart.vue');
+const Login = () => import('views/login/Login.vue');
 
 
 Vue.use(VueRouter)
@@ -35,6 +36,10 @@ const routes = [
   {
     path: '/cart',
     component: Cart
+  },
+  {
+    path: '/login',
+    component: Login
   }
 ]
 

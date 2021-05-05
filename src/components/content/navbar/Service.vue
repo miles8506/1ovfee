@@ -7,40 +7,42 @@
     </div>
     <div class="account">
       <div class="login">
-        <a href=""><span class="img"></span>Login</a>
+        <a href="/login"><span class="img"></span>Login</a>
       </div>
-      <div class="cart">
+      <div class="cart" @mouseenter="showCart" @mouseleave="hideCart">
         <a href="/cart" @click="goCart"><span class="img"></span>Cart</a>
+        <cart-box :cartBox="cartBox" v-show="isShow" />
       </div>
     </div>
   </div>
 </template>
 <script>
+//components
+import CartBox from "./CartBox";
+
 export default {
   name: "Service",
-  props: {
-    offsetY: {
-      type: Number,
-      default: 0,
-    },
+  data() {
+    return {
+      cartBox: [],
+      isShow: false,
+    };
   },
-  //監聽scrollTop數據
-  watch: {
-    offsetY(newData) {
-      if (newData > 1) {
-        $(this.$refs.service).hide();
-      } else {
-        $(this.$refs.service).show();
-      }
-    },
+  components: {
+    CartBox,
   },
   methods: {
     //前往購物車page
     goCart() {
       event.preventDefault();
-      // if () {
       this.$router.push("/cart");
-      // }
+    },
+    showCart() {
+      this.isShow = true;
+      this.cartBox = this.$store.state.cartList;
+    },
+    hideCart() {
+      this.isShow = false;
     },
   },
 };
@@ -49,14 +51,15 @@ export default {
 .service {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   height: 40px;
-  padding: 8px 0;
   background-color: #666;
 }
 
 /* social */
 .social {
   display: flex;
+  height: 40px;
 }
 
 .fb,
@@ -76,6 +79,7 @@ export default {
   height: 100%;
   font-size: 24px;
   color: #fff !important;
+  line-height: 40px;
 }
 
 .social div a:hover {
@@ -89,7 +93,12 @@ export default {
 
 .login,
 .cart {
-  line-height: 24px;
+  line-height: 40px;
+  height: 40px;
+}
+
+.cart {
+  position: relative;
 }
 
 .login a,

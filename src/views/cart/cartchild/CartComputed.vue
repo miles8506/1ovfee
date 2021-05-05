@@ -38,7 +38,7 @@ export default {
     goodsTotal() {
       let count = 0;
       this.cartList.forEach((item) => {
-        count += item.count * item.newPrice;
+        if (item.status) count += item.count * item.newPrice;
       });
       return count;
     },

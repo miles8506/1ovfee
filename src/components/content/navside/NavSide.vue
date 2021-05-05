@@ -29,7 +29,7 @@ export default {
 /* nav_side */
 .nav_wrap {
   position: sticky;
-  top: 100px;
+  top: 140px;
 }
 
 .nav_list .title {

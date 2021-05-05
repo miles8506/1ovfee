@@ -1,6 +1,6 @@
 <template>
   <div class="nav_bar">
-    <service :offsetY="offsetY" />
+    <service />
     <h1 ref="logoWrap">
       <a href="/home" class="logo"><img :src="logoURL" alt="" /></a>
     </h1>
@@ -21,7 +21,6 @@ export default {
     return {
       navItem: ["首頁", "本週新品", "熱銷現貨", "人氣預定"],
       logoURL: "https://www.lovfee.com/images/logo/logo.jpg",
-      offsetY: 0,
     };
   },
   components: {
@@ -31,7 +30,6 @@ export default {
   mounted() {
     window.addEventListener("scroll", () => {
       navbarJS().then((res) => {
-        this.offsetY = res;
         if (res > 1) {
           this.$refs.logoWrap.classList.add("current");
         } else {
@@ -49,8 +47,7 @@ export default {
   left: 0;
   width: 100%;
   line-height: 80px;
-  overflow: hidden;
-  z-index: 99999;
+  z-index: 999;
   background: #fff;
 }
 
@@ -92,7 +89,7 @@ h1 {
 .current {
   position: absolute;
   left: 50px;
-  top: 0;
+  top: 40px;
   z-index: 1;
 }
 </style>
