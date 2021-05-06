@@ -47,7 +47,7 @@ export default {
       const goodsTotal = this.goodsTotal;
       const flag = this.curry;
       if (flag) {
-        return goodsTotal - 100;
+        return goodsTotal + 100;
       } else {
         return goodsTotal;
       }
@@ -165,6 +165,7 @@ export default {
 }
 
 .continue:hover {
+  background-color: #e0c3ac;
   color: #fff;
 }
 </style>

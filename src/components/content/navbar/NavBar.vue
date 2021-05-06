@@ -2,7 +2,7 @@
   <div class="nav_bar">
     <service />
     <h1 ref="logoWrap">
-      <a href="/home" class="logo"><img :src="logoURL" alt="" /></a>
+      <a href="/" class="logo"><img :src="logoURL" alt="" /></a>
     </h1>
     <nav-item :navItem="navItem" class="nav_item" />
   </div>

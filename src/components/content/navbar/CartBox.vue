@@ -44,12 +44,14 @@ export default {
   top: 40px;
   left: -190px;
   width: 265px;
+  max-height: 372px;
   padding-top: 20px;
   border: 2px solid #9999;
   color: #646565;
   background-color: #fff;
   z-index: 9999;
   cursor: pointer;
+  overflow: auto;
 }
 
 .cart_goods {

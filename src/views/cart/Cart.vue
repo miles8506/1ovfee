@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       cartList: [],
-      isShow: true,
+      isShow: false,
     };
   },
   components: {
@@ -29,8 +29,13 @@ export default {
   },
   created() {
     this.cartList = this.$store.state.cartList;
-    console.log(this.cartList.length);
-    this.cartList.length === 0 ? (this.isShow = false) : (this.isShow = true);
+  },
+  watch: {
+    cartList(newdata) {
+      if (newdata.length !== 0) {
+        this.isShow = true;
+      }
+    },
   },
   methods: {
     goNew() {
@@ -66,6 +71,7 @@ export default {
 }
 
 .go_new:hover a {
+  background-color: #e0c3ac;
   color: #fff !important;
 }
 

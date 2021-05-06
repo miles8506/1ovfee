@@ -49,11 +49,14 @@ export default {
   components: {
     Banner,
   },
-  mounted() {
-    getHomeData().then((res) => {
-      this.bannerImg = res.data[0].bannerImg;
-      this.advImg = res.data[0].advImg;
-    });
+  beforeCreate() {
+    getHomeData()
+      .then((res) => {
+        this.bannerImg = res.data[0].bannerImg;
+        this.advImg = res.data[0].advImg;
+      })
+      .catch((err) => console.log("err"));
+    window.scroll(0, 0);
   },
   methods: {
     getY() {
