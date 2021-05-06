@@ -7,7 +7,7 @@
     </div>
     <div class="account">
       <div class="login">
-        <a href="/login"><span class="img" @click="goLogin"></span>Login</a>
+        <a href="/login" @click="goLogin"><span class="img"></span>Login</a>
       </div>
       <div class="cart" @mouseenter="showCart" @mouseleave="hideCart">
         <a href="/cart" @click="goCart"><span class="img"></span>Cart</a>
@@ -46,7 +46,7 @@ export default {
     },
     goLogin() {
       event.preventDefault();
-      this.$$router.push("/login");
+      this.$router.push("/login");
     },
   },
 };
