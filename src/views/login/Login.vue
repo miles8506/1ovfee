@@ -23,7 +23,7 @@
           />
         </div>
         <div class="forget_psw"><a href="">忘記密碼</a></div>
-        <button class="login_btn">LOGIN</button>
+        <button class="login_btn" @click="goLogin">LOGIN</button>
       </form>
       <div class="line"></div>
       <form action="" method="post" class="register_box">
@@ -60,6 +60,7 @@
 <script>
 //JS
 import { register } from "assets/js/register.js";
+import { login } from "assets/js/login.js";
 
 export default {
   name: "Login",
@@ -78,44 +79,50 @@ export default {
     // register
     goRegister() {
       event.preventDefault();
-      let that = this;
+      const that = this;
       //信箱格式
       const rgl_email = /^([\w\.\-]){1,64}\@([\w\.\-]){1,64}$/;
       //密碼格式
       const rgl_psw = /[a-z A-Z 0-9]{6,15}/;
-      if (this.register_account === "") {
+      if (this.register_account.trim() === "") {
         this.$bus.$emit("mask", "請輸入帳號");
         return;
       } else if (!rgl_email.test(this.register_account)) {
         this.$bus.$emit("mask", "電子信箱錯誤請重新再試");
         return;
-      } else if (this.register_psw === "") {
+      } else if (this.register_psw.trim() === "") {
         this.$bus.$emit("mask", "請輸入密碼");
         return;
-      } else if (rgl_psw.test(!this.register_psw)) {
+      } else if (!rgl_psw.test(this.register_psw)) {
         this.$bus.$emit("mask", "密碼格式錯誤請重新再試");
         return;
       } else if (
         this.register_psw_double !== this.register_psw ||
-        this.register_psw_double === ""
+        this.register_psw_double.trim() === ""
       ) {
         this.$bus.$emit("mask", "密碼與確認密碼不一致");
         return;
       } else {
-        register(
-          this.register_account,
-          this.register_psw,
-          this.register_psw_double,
-          function () {
-            that.$bus.$emit("mask", "信箱已註冊請嘗試其他信箱");
-          },
-          function () {
-            that.$router.push("/home");
-          }
-        );
+        register(this.register_account, this.register_psw, that);
       }
     },
     // login
+    goLogin() {
+      const that = this;
+      event.preventDefault();
+      if (this.login_account.trim() === "") {
+        this.$bus.$emit("mask", "請輸入會員帳號");
+        return;
+      } else if (this.login_psw.trim() === "") {
+        this.$bus.$emit("mask", "請輸入會員密碼");
+        return;
+      } else {
+        login(this.login_account, this.login_psw, that);
+      }
+    },
+  },
+  mounted() {
+    window.scroll(0, 0);
   },
 };
 </script>

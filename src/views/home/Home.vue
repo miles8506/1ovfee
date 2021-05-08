@@ -56,6 +56,8 @@ export default {
         this.advImg = res.data[0].advImg;
       })
       .catch((err) => console.log("err"));
+  },
+  created() {
     window.scroll(0, 0);
   },
   methods: {

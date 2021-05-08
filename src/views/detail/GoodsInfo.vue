@@ -27,7 +27,7 @@ export default {
     InfoContent,
     InfoCart,
   },
-  beforeCreate() {
+  mounted() {
     window.scroll(0, 0);
   },
   created() {

@@ -2,7 +2,9 @@
   <div id="app">
     <mask-cover />
     <nav-bar />
-    <keep-alive exclude="GoodsInfo"><router-view></router-view></keep-alive>
+    <keep-alive exclude="GoodsInfo,Login"
+      ><router-view></router-view
+    ></keep-alive>
     <top-icon />
     <nav-bottom />
   </div>

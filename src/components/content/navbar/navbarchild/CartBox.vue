@@ -33,7 +33,9 @@ export default {
       this.$router.push(`${sort}/${iid}`);
     },
     goCart() {
-      this.$router.push("/cart");
+      localStorage.getItem("login") !== null
+        ? this.$router.push("/cart")
+        : this.$router.push("/login");
     },
   },
 };

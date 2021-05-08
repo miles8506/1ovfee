@@ -9,8 +9,8 @@
 </template>
 <script>
 //homechild
-import NavItem from "./NavItem";
-import Service from "./Service";
+import NavItem from "./navbarchild/NavItem";
+import Service from "./navbarchild/Service";
 
 //JS
 import { navbarJS } from "assets/js/navbar.js";

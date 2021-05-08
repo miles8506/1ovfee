@@ -30,6 +30,9 @@ export default {
   created() {
     this.cartList = this.$store.state.cartList;
   },
+  mounted() {
+    window.scroll(0, 0);
+  },
   watch: {
     cartList(newdata) {
       if (newdata.length !== 0) {
@@ -71,6 +74,7 @@ export default {
 }
 
 .go_new:hover a {
+  border-radius: 10px;
   background-color: #e0c3ac;
   color: #fff !important;
 }

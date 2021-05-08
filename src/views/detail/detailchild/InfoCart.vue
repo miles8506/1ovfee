@@ -10,7 +10,13 @@
       <!-- text end-->
 
       <!-- wish start-->
-      <div class="wish">ADD WISH LIST</div>
+      <div class="wish">
+        <span class="wish_logo" @click="addWish" :class="{ current: isWished }"
+          ><span class="added_mark" v-show="isWished"></span></span
+        >
+        ADD WISH
+      </div>
+
       <!-- wish end -->
 
       <!-- price start-->
@@ -84,6 +90,9 @@
   </div>
 </template>
 <script>
+//JS
+import { wish, wishApi } from "assets/js/wish.js";
+
 export default {
   name: "InfoCart",
   data() {
@@ -91,6 +100,7 @@ export default {
       goodsSize: "",
       count: 1,
       flag: true,
+      isWished: false,
     };
   },
   props: {
@@ -100,6 +110,21 @@ export default {
         return {};
       },
     },
+  },
+  created() {
+    if (localStorage.getItem("login") !== null) {
+      const wishList = JSON.parse(localStorage.getItem("login")).wishList;
+      if (wishList !== null) {
+        const flag = wishList.some((item) => item.id == this.currentGoods.id);
+        if (flag) {
+          this.isWished = true;
+        } else {
+          this.isWished = false;
+        }
+      } else {
+        this.isWished = false;
+      }
+    }
   },
   mounted() {
     this.$refs.sizeAlert.disabled = true;
@@ -135,6 +160,16 @@ export default {
       this.$store.dispatch("putCart", data);
       this.$router.push("/cart");
     },
+    addWish() {
+      if (localStorage.getItem("login") === null) {
+        this.$bus.$emit("mask", "請先登入帳號");
+      } else {
+        wish(this.currentGoods);
+        this.isWished = !this.isWished;
+        const data = JSON.parse(localStorage.getItem("login"));
+        wishApi(data);
+      }
+    },
   },
 };
 </script>
@@ -142,6 +177,7 @@ export default {
 .info_cart {
   position: relative;
   padding: 0 10 10px;
+  cursor: default;
 }
 
 .info_wrap {
@@ -168,6 +204,35 @@ export default {
 /* wish */
 .wish {
   margin-bottom: 10px;
+}
+
+.wish_logo {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  line-height: 20px;
+  font-family: "icomoon";
+  font-size: 18px;
+  color: rgb(224, 145, 159);
+  cursor: pointer;
+}
+
+.wish_logo:hover {
+  color: rgb(200, 93, 111);
+}
+
+.added_mark {
+  position: absolute;
+  top: 37%;
+  left: 31%;
+  width: 7px;
+  height: 4px;
+  transform: translate(-50%, -50%);
+  transform: rotate(-45deg);
+  border-bottom: 2px solid #fff;
+  border-left: 2px solid #fff;
 }
 
 /* price */
@@ -304,5 +369,10 @@ export default {
   text-align: justify;
   line-height: 23px;
   font-size: 12px;
+}
+
+/* current */
+.current {
+  color: rgb(200, 93, 111);
 }
 </style>
