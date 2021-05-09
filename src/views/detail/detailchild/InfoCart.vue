@@ -114,7 +114,7 @@ export default {
   created() {
     if (localStorage.getItem("login") !== null) {
       const wishList = JSON.parse(localStorage.getItem("login")).wishList;
-      if (wishList !== null) {
+      if (wishList !== undefined) {
         const flag = wishList.some((item) => item.id == this.currentGoods.id);
         if (flag) {
           this.isWished = true;
@@ -147,6 +147,11 @@ export default {
     },
     goCart() {
       event.preventDefault();
+      const user = localStorage.getItem("login");
+      if (localStorage.getItem("login") === null) {
+        this.$bus.$emit("mask", "請先登入帳號");
+        return;
+      }
       let data = {};
       data.count = this.count;
       data.goodsName = this.currentGoods.goodsName;
@@ -163,12 +168,12 @@ export default {
     addWish() {
       if (localStorage.getItem("login") === null) {
         this.$bus.$emit("mask", "請先登入帳號");
-      } else {
-        wish(this.currentGoods);
-        this.isWished = !this.isWished;
-        const data = JSON.parse(localStorage.getItem("login"));
-        wishApi(data);
+        return;
       }
+      wish(this.currentGoods);
+      this.isWished = !this.isWished;
+      const data = JSON.parse(localStorage.getItem("login"));
+      wishApi(data);
     },
   },
 };

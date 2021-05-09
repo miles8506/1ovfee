@@ -4,17 +4,34 @@
       <li v-for="(item, index) in navItem" :key="index">
         <a :href="pathURL[index]" @click="goNext(index)">{{ item }}</a>
       </li>
-      <li class="search"><input type="text" placeholder="Search" /></li>
+      <li class="search">
+        <input
+          type="text"
+          placeholder="Search"
+          @input="searchData"
+          v-model.trim="searchValue"
+          @focus="clickipt('focus')"
+          @blur="clickipt('blur')"
+        />
+        <search-list :searchValue="searchValue" />
+      </li>
     </ul>
   </div>
 </template>
 <script>
+//components
+import SearchList from "./SearchList";
+
 export default {
   name: "NavItem",
   data() {
     return {
       pathURL: ["/home", "/new", "/hot", "/popular"],
+      searchValue: "",
     };
+  },
+  components: {
+    SearchList,
   },
   props: {
     navItem: {
@@ -43,6 +60,12 @@ export default {
           break;
       }
     },
+    searchData() {
+      this.$bus.$emit("search");
+    },
+    clickipt(status) {
+      this.$bus.$emit("ipt", status);
+    },
   },
 };
 </script>
@@ -57,6 +80,7 @@ export default {
   animation: move 1s linear forwards;
   animation-delay: 1000ms;
 }
+
 .item_wrap li {
   padding: 0 25px;
   line-height: 79px;

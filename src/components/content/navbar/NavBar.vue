@@ -2,9 +2,9 @@
   <div class="nav_bar">
     <service />
     <h1 ref="logoWrap">
-      <a href="/" class="logo"><img :src="logoURL" alt="" /></a>
+      <a href="/" class="logo" @click="goHome"><img :src="logoURL" alt="" /></a>
     </h1>
-    <nav-item :navItem="navItem" class="nav_item" />
+    <nav-item :navItem="navItem" class="nav_item" :class="{ status: isShow }" />
   </div>
 </template>
 <script>
@@ -21,6 +21,7 @@ export default {
     return {
       navItem: ["首頁", "本週新品", "熱銷現貨", "人氣預定"],
       logoURL: "https://www.lovfee.com/images/logo/logo.jpg",
+      isShow: false,
     };
   },
   components: {
@@ -37,6 +38,19 @@ export default {
         }
       });
     });
+    this.$bus.$on("ipt", (status) => {
+      status == "focus" ? (this.isShow = true) : (this.isShow = false);
+    });
+  },
+  methods: {
+    goHome() {
+      event.preventDefault();
+      if (this.$route.path === "/home") return;
+      this.$router.push("/");
+    },
+  },
+  destroyed() {
+    this.$bus.$off("ipt");
   },
 };
 </script>
@@ -91,5 +105,9 @@ h1 {
   left: 50px;
   top: 40px;
   z-index: 1;
+}
+
+.status {
+  overflow: visible !important;
 }
 </style>

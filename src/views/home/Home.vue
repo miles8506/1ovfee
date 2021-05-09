@@ -57,7 +57,7 @@ export default {
       })
       .catch((err) => console.log("err"));
   },
-  created() {
+  activated() {
     window.scroll(0, 0);
   },
   methods: {

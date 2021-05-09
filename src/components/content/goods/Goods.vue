@@ -16,7 +16,7 @@
           >
             <img :src="item.img" alt="" class="goods_img" />
             <div class="goods_name">
-              <a href="javascript:;"> {{ item.goodsName }}</a>
+              <a :href="'/new/' + goodsId"> {{ item.goodsName }}</a>
             </div>
             <div class="price">
               <span class="new_price">NT${{ item.newPrice }}</span
@@ -126,6 +126,12 @@ export default {
 .goods_img {
   width: 200px;
   height: 250px;
+  opacity: 1;
+  transition: opacity 0.6s;
+}
+
+.goods_img:hover {
+  opacity: 0.7;
 }
 
 .goods_name,

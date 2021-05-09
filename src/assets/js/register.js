@@ -10,8 +10,11 @@ export function register(account, psw, that) {
       if (data == 0) {
         that.$bus.$emit("mask", "信箱已註冊請嘗試其他信箱");
       } else if (data == 1) {
-        that.$router.push("/home");
+        that.register_account = "";
+        that.register_psw = "";
+        that.register_psw_double = "";
+        that.$bus.$emit("mask", "註冊成功");
       };
     },
   });
-}
+};

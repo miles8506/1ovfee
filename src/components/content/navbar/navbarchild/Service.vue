@@ -1,9 +1,9 @@
 <template>
   <div class="service" ref="service">
     <div class="social">
-      <div class="fb"><a href=""></a></div>
-      <div class="twitter"><a href=""></a></div>
-      <div class="line"><a href=""></a></div>
+      <div class="fb"><a href="javascript:;"></a></div>
+      <div class="twitter"><a href="javascript:;"></a></div>
+      <div class="line"><a href="javascript:;"></a></div>
     </div>
     <div class="account">
       <div class="login" v-if="isShowLog">
@@ -89,6 +89,7 @@ export default {
     Logout() {
       this.isShowLog = true;
       localStorage.removeItem("login");
+      this.$bus.$emit("mask", "帳號已登出");
     },
   },
 };
