@@ -158,6 +158,7 @@ export default {
       data.goodsSize = this.goodsSize;
       data.id = this.currentGoods.id;
       data.img = this.currentGoods.img;
+      data.moreImg = this.currentGoods.moreImg;
       data.newPrice = this.currentGoods.newPrice;
       data.oldPrice = this.currentGoods.oldPrice;
       data.status = true;

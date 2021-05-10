@@ -1,6 +1,10 @@
 <template>
   <div class="info_content">
-    <div class="goods_img" v-for="(item, index) in moreImg" :key="index">
+    <div
+      class="goods_img"
+      v-for="(item, index) in currentGoods.moreImg"
+      :key="index"
+    >
       <img :src="item" alt="" />
     </div>
   </div>
@@ -20,9 +24,6 @@ export default {
         return {};
       },
     },
-  },
-  mounted() {
-    this.moreImg = this.currentGoods.moreImg;
   },
 };
 </script>

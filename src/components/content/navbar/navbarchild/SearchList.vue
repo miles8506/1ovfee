@@ -1,29 +1,38 @@
 <template>
   <div class="searchList" v-show="isShow">
-    <div class="search_item" v-for="(item, index) in searchArr" :key="index">
-      <div class="search_left">
-        <img :src="item.img" alt="" />
-      </div>
-      <div class="search_right">
-        <div class="goods_name">{{ item.goodsName }}</div>
-        <div class="pric">
-          <span class="new_price">NT{{ item.newPrice }}</span>
-          <span class="old_price">NT$.{{ item.oldPrice }}</span>
+    <div v-if="showList">
+      <div class="search_item" v-for="(item, index) in searchArr" :key="index">
+        <div class="search_left">
+          <img :src="item.img" alt="" />
         </div>
-        <div class="size">
-          SIZE:
-          <span v-for="(item, index) in item.size" :key="index">
-            {{ item }}
-          </span>
+        <div class="search_right">
+          <a
+            href="javascript:;"
+            class="search_link"
+            @click="goGoods(item.id, item.sort, item)"
+          >
+            <div class="goods_name">{{ item.goodsName }}</div>
+            <div class="pric">
+              <span class="new_price">NT{{ item.newPrice }}</span>
+              <span class="old_price">NT$.{{ item.oldPrice }}</span>
+            </div>
+            <div class="size">
+              SIZE:
+              <span v-for="(item, index) in item.size" :key="index">
+                {{ item }}
+              </span>
+            </div>
+          </a>
         </div>
       </div>
     </div>
+    <div v-else class="nothing"><span>搜尋不到相關商品</span></div>
   </div>
 </template>
 <script>
 //JS
 import { Debounce } from "components/common/debounce/debounce.js";
-import { blurSearch } from "assets/js/search.js";
+import { blurSearch, blurDetail } from "assets/js/search.js";
 
 export default {
   name: "BlurSearch",
@@ -32,6 +41,7 @@ export default {
       deBounce: null,
       searchArr: [],
       isShow: false,
+      showList: false,
     };
   },
   props: {
@@ -52,7 +62,31 @@ export default {
       if (this.searchValue.length < 1) return (this.isShow = false);
       this.isShow = true;
       this.searchArr = [];
-      blurSearch(this.searchValue, this.searchArr);
+      blurSearch(this.searchValue, this.searchArr).then(() => {
+        if (this.searchArr.length > 0)
+          this.$store.dispatch("putSearchList", this.searchArr);
+        else return;
+      });
+    },
+    goGoods(iid, sort, item) {
+      event.preventDefault();
+      blurDetail(iid, sort)
+        .then((res) => {
+          const arr = [];
+          arr.push(item);
+          this.$store.dispatch("putGoodsList", arr).then((res) => {
+            this.$router.push(`/${item.sort}/${item.id}`);
+            this.$store.state.infoFlag = !this.$store.state.infoFlag;
+          });
+        })
+        .catch((err) => console.log(err));
+    },
+  },
+  watch: {
+    searchArr(newData) {
+      if (newData) {
+        newData.length > 0 ? (this.showList = true) : (this.showList = false);
+      }
     },
   },
   destroyed() {
@@ -103,6 +137,11 @@ export default {
   padding: 0 10px;
 }
 
+.search_link:hover {
+  text-decoration: underline !important;
+  color: #505050 !important;
+}
+
 .search_right div {
   margin-bottom: 5px;
 }
@@ -121,5 +160,11 @@ export default {
 .old_price {
   color: #9999;
   text-decoration: line-through;
+}
+
+/* nothing */
+.nothing {
+  display: flex;
+  justify-content: center;
 }
 </style>

@@ -1,17 +1,38 @@
 <template>
   <div class="member_list">
     <div><a href="">會員資料</a></div>
-    <div><a href="">Wish List</a></div>
+    <div>
+      <a
+        :href="`/wishlist/${userId}`"
+        @click="goWishList"
+        @mouseover="pushUserId"
+        >Wish List</a
+      >
+    </div>
     <div><a href="/logout" @click="logout">登出</a></div>
   </div>
 </template>
 <script>
 export default {
   name: "Member",
+  data() {
+    return {
+      userId: "",
+    };
+  },
   methods: {
     logout() {
       event.preventDefault();
+      this.$store.commit("logout", []);
       this.$emit("Logout");
+    },
+    pushUserId() {
+      const userid = JSON.parse(localStorage.getItem("login")).account;
+      this.userId = userid;
+    },
+    goWishList() {
+      event.preventDefault();
+      this.$router.push(`/wishlist/${this.userId}`);
     },
   },
 };

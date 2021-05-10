@@ -13,6 +13,7 @@
           @focus="clickipt('focus')"
           @blur="clickipt('blur')"
         />
+        <span class="search_icon" @click="goSearch"></span>
         <search-list :searchValue="searchValue" />
       </li>
     </ul>
@@ -64,7 +65,14 @@ export default {
       this.$bus.$emit("search");
     },
     clickipt(status) {
-      this.$bus.$emit("ipt", status);
+      setTimeout(() => {
+        this.$bus.$emit("ipt", status);
+      }, 500);
+    },
+    goSearch() {
+      const flag = this.$store.state.flag;
+      this.$store.commit("putFlag", !flag);
+      this.$router.push("/search");
     },
   },
 };
@@ -101,7 +109,7 @@ export default {
 input {
   width: 170px;
   height: 25px;
-  padding: 5px 10px;
+  padding: 5px calc(100% - 145px) 5px 10px;
   outline: none;
   border: 0;
   border-bottom: 1px solid #999;
@@ -113,10 +121,9 @@ input {
   position: relative;
 }
 
-.search::after {
-  content: "\e986";
+.search_icon {
   position: absolute;
-  top: 50%;
+  top: 55%;
   transform: translateY(-50%);
   right: 25px;
   width: 25px;

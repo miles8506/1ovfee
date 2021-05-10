@@ -5,7 +5,7 @@
       <div class="cart_left">
         <img :src="item.img" alt="" />
       </div>
-      <div class="cart_right" @click="goGoodsInfo(item.id, item.sort)">
+      <div class="cart_right" @click="goGoodsInfo(item)">
         <div class="goods_name">{{ item.goodsName }}</div>
         <div class="size">SIZE:{{ item.goodsSize }}</div>
         <div class="quantity">QTY:{{ item.count }}</div>
@@ -27,10 +27,12 @@ export default {
     },
   },
   methods: {
-    //前往點擊後商品的相對位置
-    goGoodsInfo(iid, sort) {
-      this.$router.push("/");
-      this.$router.push(`${sort}/${iid}`);
+    goGoodsInfo(item) {
+      const arr = [];
+      arr.push(item);
+      this.$store.commit("putGoodsList", arr);
+      this.$router.push(`/${item.sort}/${item.id}`);
+      this.$store.state.infoFlag = !this.$store.state.infoFlag;
     },
     goCart() {
       localStorage.getItem("login") !== null

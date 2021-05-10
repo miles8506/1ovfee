@@ -7,6 +7,7 @@
       </nav>
       <!-- 右側商品項目 -->
       <div class="goods_item">
+        <!-- <div class="wrap"> -->
         <div class="goods" v-for="(item, index) in Goods" :key="index">
           <a
             class="goods_wrap"
@@ -24,6 +25,7 @@
             </div>
           </a>
         </div>
+        <!-- </div> -->
       </div>
     </div>
     <slot name="pageBar"></slot>
@@ -111,7 +113,7 @@ export default {
 }
 
 .goods_item .goods {
-  flex: 25%;
+  width: 240px;
   height: 350px;
 }
 

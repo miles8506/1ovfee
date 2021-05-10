@@ -20,6 +20,7 @@ export default {
   data() {
     return {
       currentGoods: {},
+      init: null,
     };
   },
   components: {
@@ -27,14 +28,24 @@ export default {
     InfoContent,
     InfoCart,
   },
-  mounted() {
-    window.scroll(0, 0);
-  },
   created() {
     let filterArray = this.$store.state.goodsList.filter((item) => {
       return item.id == this.$route.params.goodsId;
     });
     this.currentGoods = filterArray[0];
+  },
+  computed: {
+    refresh() {
+      return this.$store.state.infoFlag;
+    },
+  },
+  watch: {
+    refresh() {
+      let filterArray = this.$store.state.goodsList.filter((item) => {
+        return item.id == this.$route.params.goodsId;
+      });
+      this.currentGoods = filterArray[0];
+    },
   },
 };
 </script>

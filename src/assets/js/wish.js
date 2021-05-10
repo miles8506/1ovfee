@@ -5,7 +5,6 @@ export function wishApi(data) {
     type: 'get',
     data: { data },
     success(status) {
-      console.log(status);
     }
   })
 }

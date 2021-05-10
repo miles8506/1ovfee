@@ -9,7 +9,11 @@ Vue.use(Vuex)
 
 let state = {
   goodsList: [],
-  cartList: []
+  cartList: [],
+  searchList: [],
+  //flag乃是用來監聽search page點擊後回調給watch更新新的data
+  flag: true,
+  infoFlag: true,
 }
 
 export default new Vuex.Store({

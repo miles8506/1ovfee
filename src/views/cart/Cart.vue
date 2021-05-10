@@ -2,7 +2,7 @@
   <div class="cart">
     <div v-if="isShow">
       <cart-list :cartList="cartList" />
-      <cart-computed />
+      <cart-computed @hidecart="hidecart" />
     </div>
     <div v-else class="is_none">
       <div class="text">您的購物車還是空的</div>
@@ -27,23 +27,20 @@ export default {
     CartList,
     CartComputed,
   },
-  created() {
+  activated() {
     this.cartList = this.$store.state.cartList;
+    this.cartList.length > 0 ? (this.isShow = true) : (this.isShow = false);
   },
   mounted() {
     window.scroll(0, 0);
-  },
-  watch: {
-    cartList(newdata) {
-      if (newdata.length !== 0) {
-        this.isShow = true;
-      }
-    },
   },
   methods: {
     goNew() {
       event.preventDefault();
       this.$router.push("/new");
+    },
+    hidecart() {
+      this.isShow = false;
     },
   },
 };

@@ -89,6 +89,7 @@ export default {
     Logout() {
       this.isShowLog = true;
       localStorage.removeItem("login");
+      this.$router.push("/");
       this.$bus.$emit("mask", "帳號已登出");
     },
   },

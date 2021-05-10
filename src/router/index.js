@@ -12,6 +12,8 @@ const New = () => import('views/new/New.vue');
 const GoodsInfo = () => import('views/detail/GoodsInfo.vue');
 const Cart = () => import('views/cart/Cart.vue');
 const Login = () => import('views/login/Login.vue');
+const Search = () => import('views/search/Search.vue');
+const WishList = () => import('views/wishlist/WishList.vue');
 
 
 Vue.use(VueRouter)
@@ -40,6 +42,14 @@ const routes = [
   {
     path: '/login',
     component: Login
+  },
+  {
+    path: '/search',
+    component: Search
+  },
+  {
+    path: '/wishlist/:userid',
+    component: WishList
   }
 ]
 
