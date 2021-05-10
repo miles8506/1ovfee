@@ -47,13 +47,13 @@ export default {
       const goodsTotal = this.goodsTotal;
       const flag = this.curry;
       if (flag) {
-        if (goodsTotal == 0) {
+        if (goodsTotal == 0 && this.cartList.length == 0) {
           this.$emit("hidecart");
           return;
         }
         return goodsTotal + 100;
       } else {
-        if (goodsTotal == 0) {
+        if (goodsTotal == 0 && this.cartList.length == 0) {
           this.$emit("hidecart");
           return;
         }
