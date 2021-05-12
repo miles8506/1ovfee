@@ -34,6 +34,10 @@ export default {
     });
     this.currentGoods = filterArray[0];
   },
+  mounted() {
+    window.scroll(0, 0);
+    document.title = `1ovfee-${this.currentGoods.goodsName}`;
+  },
   computed: {
     refresh() {
       return this.$store.state.infoFlag;

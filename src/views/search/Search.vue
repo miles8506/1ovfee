@@ -24,6 +24,9 @@ export default {
       this.searchArr = obj;
     }, 50);
   },
+  activated() {
+    document.title = this.$route.meta.title;
+  },
   computed: {
     flag() {
       return this.$store.state.flag;

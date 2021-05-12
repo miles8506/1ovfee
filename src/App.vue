@@ -2,7 +2,7 @@
   <div id="app">
     <mask-cover />
     <nav-bar />
-    <keep-alive exclude="GoodsInfo,Login"
+    <keep-alive exclude="GoodsInfo,Login,Cart"
       ><router-view></router-view
     ></keep-alive>
     <top-icon />
@@ -28,5 +28,4 @@ export default {
 </script>
 <style scoped>
 @import "assets/css/base.css";
-/* mask */
 </style>

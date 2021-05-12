@@ -59,6 +59,7 @@ export default {
   },
   activated() {
     window.scroll(0, 0);
+    document.title = this.$route.meta.title;
   },
   methods: {
     getY() {

@@ -21,35 +21,58 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/home',
+    meta: {
+      title: '1ovfee'
+    }
+
   },
   {
     path: '/home',
-    component: Home
+    component: Home,
+    meta: {
+      title: '1ovfee'
+    }
   },
   {
     path: '/new',
-    component: New
+    component: New,
+    meta: {
+      title: '1ovfee-本週新品'
+    }
   },
   {
     path: '/new/:goodsId',
-    component: GoodsInfo
+    component: GoodsInfo,
   },
   {
     path: '/cart',
-    component: Cart
+    component: Cart,
+    meta: {
+      title: '1ovfee-購物車'
+    }
+
   },
   {
     path: '/login',
-    component: Login
+    component: Login,
+    meta: {
+      title: '1ovfee-登入/註冊'
+    }
   },
   {
     path: '/search',
-    component: Search
+    component: Search,
+    meta: {
+      title: '1ovfee-搜尋列表'
+    }
   },
   {
     path: '/wishlist/:userid',
-    component: WishList
+    component: WishList,
+    meta: {
+      title: '1ovfee-WishList'
+    }
   }
 ]
 

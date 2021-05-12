@@ -15,6 +15,9 @@
 import CartList from "./cartchild/CartList";
 import CartComputed from "./cartchild/CartComputed";
 
+//JS
+import { setGoods } from "assets/js/userCartList.js";
+
 export default {
   name: "Cart",
   data() {
@@ -27,12 +30,12 @@ export default {
     CartList,
     CartComputed,
   },
-  activated() {
-    this.cartList = this.$store.state.cartList;
-    this.cartList.length > 0 ? (this.isShow = true) : (this.isShow = false);
-  },
   mounted() {
     window.scroll(0, 0);
+    this.cartList = this.$store.state.cartList;
+    this.cartList.length > 0 ? (this.isShow = true) : (this.isShow = false);
+    document.title = this.$route.meta.title;
+    setGoods(this.cartList);
   },
   methods: {
     goNew() {

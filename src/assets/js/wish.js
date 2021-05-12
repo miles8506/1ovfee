@@ -1,3 +1,5 @@
+import { get } from "jquery";
+
 //back
 export function wishApi(data) {
   $.ajax({
@@ -6,8 +8,8 @@ export function wishApi(data) {
     data: { data },
     success(status) {
     }
-  })
-}
+  });
+};
 
 //front
 export function wish(goods) {
@@ -25,4 +27,16 @@ export function wish(goods) {
   }
   wishList = JSON.stringify(wishList);
   localStorage.setItem("login", wishList);
-}
+};
+
+//wishlist delete
+export function wishDelete(data, fn) {
+  $.ajax({
+    url: 'http://127.0.0.1:3000/deletewish',
+    type: 'get',
+    data: { data },
+    success(status) {
+      if (status == 1) fn();
+    }
+  });
+};

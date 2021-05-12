@@ -11,7 +11,10 @@ export function login(account, psw, that) {
         let obj = {};
         obj.account = account;
         obj.wishList = data.wish;
+        obj.cartList = data.cart;
+        that.$store.commit('login', data.cart);
         obj = JSON.stringify(obj);
+        // console.log(obj);
         localStorage.setItem('login', obj);
         //傳入service將login item隱藏
         that.$bus.$emit('user');

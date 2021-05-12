@@ -34,6 +34,9 @@ export default {
       this.pages = Object.keys(res.data[1].new);
     });
   },
+  activated() {
+    document.title = this.$route.meta.title;
+  },
   watch: {
     countData(newData) {
       if (newData) this.completedData = true;

@@ -75,6 +75,9 @@ export default {
       register_psw_double: "",
     };
   },
+  mounted() {
+    document.title = this.$route.meta.title;
+  },
   methods: {
     // register
     goRegister() {

@@ -27,5 +27,9 @@ export default {
   //登出後購物車清空
   logout(state, data) {
     state.cartList = data;
+  },
+
+  login(state, data) {
+    state.cartList = data;
   }
 }

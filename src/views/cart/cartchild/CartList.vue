@@ -61,6 +61,7 @@
 <script>
 //JS
 import { filterData } from "assets/js/filterData.js";
+import { computedGoods } from "assets/js/userCartList.js";
 
 export default {
   name: "CartList",
@@ -82,29 +83,35 @@ export default {
     // quantity-form -
     decrement(iid, size) {
       const data = filterData(this.cartList, iid, size);
-      data.count > 1 ? data.count-- : data.count;
+      if (data.count < 1) return;
+      data.count--;
+      computedGoods(this.cartList);
     },
     // quantity-form +
     increment(iid, size) {
       const data = filterData(this.cartList, iid, size);
       data.count++;
+      computedGoods(this.cartList);
     },
     // quantity-form input
     setCount(iid, size) {
-      const val = event.target.value;
+      const val = parseInt(event.target.value);
       const data = filterData(this.cartList, iid, size);
       data.count = val;
+      computedGoods(this.cartList);
     },
     //removeGoods
     removeGoods(iid, size) {
       const data = filterData(this.cartList, iid, size);
       const index = this.cartList.indexOf(data);
       this.cartList.splice(index, 1);
+      computedGoods(this.cartList);
     },
     //單選
     checked(iid, size) {
       const data = filterData(this.cartList, iid, size);
       data.status = !data.status;
+      computedGoods(this.cartList);
     },
     //全選
     setAll() {

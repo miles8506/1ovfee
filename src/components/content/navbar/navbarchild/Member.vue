@@ -13,6 +13,9 @@
   </div>
 </template>
 <script>
+//JS
+import { logOut } from "assets/js/logout.js";
+
 export default {
   name: "Member",
   data() {
@@ -23,7 +26,10 @@ export default {
   methods: {
     logout() {
       event.preventDefault();
+      const user = JSON.parse(localStorage.getItem("login")).account;
+      const cartList = this.$store.state.cartList;
       this.$store.commit("logout", []);
+      logOut(cartList, user);
       this.$emit("Logout");
     },
     pushUserId() {

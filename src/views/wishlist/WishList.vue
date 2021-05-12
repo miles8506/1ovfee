@@ -23,6 +23,7 @@ export default {
     this.wishList = [];
     const data = JSON.parse(localStorage.getItem("login")).wishList;
     this.wishList.push(...data);
+    document.title = this.$route.meta.title;
   },
   components: {
     WishItem,

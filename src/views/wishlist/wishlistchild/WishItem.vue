@@ -1,12 +1,14 @@
 <template>
   <div class="wish_item">
-    <div class="wish_goods" v-for="(item, index) in wishList" :key="index">
+    <div class="wish_goods" v-for="(item, index) in wishData" :key="index">
       <div class="goods_img">
         <img :src="item.img" alt="" />
       </div>
       <div class="goods_info">
         <div class="goods_name">
-          <a href="">{{ item.goodsName }}</a>
+          <a :href="`/${item.sort}/${item.id}`" @click="goDetail(item)">{{
+            item.goodsName
+          }}</a>
         </div>
         <div class="size">
           SIZE:
@@ -22,15 +24,20 @@
       <div class="add_cart">
         <span class="add_btn" @click="goDetail(item)">Add to Cart</span>
       </div>
-      <div class="delete"><span></span></div>
+      <div class="delete"><span @click="deleteItem(item)"></span></div>
     </div>
   </div>
 </template>
 <script>
+//JS
+import { wishDelete } from "assets/js/wish.js";
+
 export default {
   name: "WishItem",
   data() {
-    return {};
+    return {
+      wishData: null,
+    };
   },
   props: {
     wishList: {
@@ -40,12 +47,33 @@ export default {
       },
     },
   },
+  created() {
+    this.wishData = this.wishList;
+  },
   methods: {
     goDetail(item) {
+      event.preventDefault();
       const arr = [];
       arr.push(item);
       this.$store.commit("putGoodsList", arr);
       this.$router.push(`/${item.sort}/${item.id}`);
+    },
+    deleteItem(data) {
+      const that = this;
+      let wish = JSON.parse(localStorage.getItem("login"));
+      const wishList = wish.wishList;
+      const index = wishList.findIndex((item) => item.id == data.id);
+      wishList.splice(index, 1);
+      wishDelete(wish, function () {
+        that.wishData = wishList;
+      });
+      wish = JSON.stringify(wish);
+      localStorage.setItem("login", wish);
+    },
+  },
+  watch: {
+    wishList(newData) {
+      this.wishData = newData;
     },
   },
 };
