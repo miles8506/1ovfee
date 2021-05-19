@@ -81,8 +81,9 @@ export default {
     //獲取相對應商品id
     goInfo() {
       event.preventDefault();
+      const sort = this.Goods[0].sort;
       this.$store.commit("putGoodsList", this.Goods);
-      this.$router.push("/new/" + this.goodsId);
+      this.$router.push(`/${sort}/${this.goodsId}`);
     },
   },
 };
@@ -101,19 +102,19 @@ export default {
 /* nav */
 .nav_list {
   position: relative;
-  flex: 20%;
+  flex: 25%;
   padding: 0 0 40px 30px;
 }
 
 /* goods */
 .goods_item {
   display: flex;
-  flex: 80%;
+  flex: 75%;
   flex-wrap: wrap;
 }
 
 .goods_item .goods {
-  width: 240px;
+  flex: 25%;
   height: 350px;
 }
 
@@ -170,6 +171,52 @@ export default {
 .old_price {
   text-decoration: line-through;
   color: #999;
+}
+
+/* 1350px */
+@media screen and (max-width: 1350px) {
+  .Goods {
+    padding: 50px 30px 0;
+  }
+}
+
+/* 1200px */
+@media screen and (max-width: 1200px) {
+  .goods_item .goods {
+    width: initial;
+    flex: 25%;
+  }
+}
+
+/* 992px */
+@media screen and (max-width: 992px) {
+  .Goods {
+    padding: 50px 10px 0;
+  }
+}
+
+/* 650px */
+@media screen and (max-width: 650px) {
+  .goods_item .goods {
+    flex: 100%;
+  }
+  .nav_list {
+    flex: 30%;
+  }
+  .goods_item {
+    flex: 70%;
+  }
+}
+
+/* 510px */
+@media screen and (max-width: 510px) {
+  .nav_list {
+    flex: 35%;
+    padding-left: 10px;
+  }
+  .goods_item {
+    flex: 65%;
+  }
 }
 </style>
             

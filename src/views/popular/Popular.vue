@@ -1,5 +1,5 @@
 <template>
-  <div class="new">
+  <div class="popular">
     <goods :countData="countData">
       <template v-slot:pageBar>
         <page-bar :pages="pages" />
@@ -8,7 +8,6 @@
   </div>
 </template>
 <script>
-//components
 import Goods from "components/content/goods/Goods.vue";
 import PageBar from "components/content/pagebar/PageBar.vue";
 
@@ -16,11 +15,10 @@ import PageBar from "components/content/pagebar/PageBar.vue";
 import { getHomeData } from "network/home.js";
 
 export default {
-  name: "New",
+  name: "Popular",
   data() {
     return {
       countData: null,
-      completedData: false,
       pages: null,
     };
   },
@@ -30,17 +28,12 @@ export default {
   },
   created() {
     getHomeData().then((res) => {
-      this.countData = res.data[1].new;
+      this.countData = res.data[1].popular;
       this.pages = Object.keys(res.data[1].new);
     });
   },
   activated() {
     document.title = this.$route.meta.title;
-  },
-  watch: {
-    countData(newData) {
-      if (newData) this.completedData = true;
-    },
   },
 };
 </script>

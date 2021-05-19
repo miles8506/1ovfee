@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <ul class="item_wrap">
+  <div class="nav_item">
+    <ul class="item_wrap" ref="itemWrap">
       <li v-for="(item, index) in navItem" :key="index">
         <a :href="pathURL[index]" @click="goNext(index)">{{ item }}</a>
       </li>
@@ -23,6 +23,9 @@
 //components
 import SearchList from "./SearchList";
 
+//JS
+import { navbarJS } from "assets/js/navbar.js";
+
 export default {
   name: "NavItem",
   data() {
@@ -30,6 +33,31 @@ export default {
       pathURL: ["/home", "/new", "/hot", "/popular"],
       searchValue: "",
     };
+  },
+  mounted() {
+    //RWD
+    let windowWidth = window.innerWidth;
+    let result = 0;
+    window.addEventListener("resize", () => {
+      if (result < 1) return;
+      windowWidth = window.innerWidth;
+      if (windowWidth > 1200) {
+        this.$refs.itemWrap.classList.remove("current");
+      } else {
+        this.$refs.itemWrap.classList.add("current");
+      }
+    });
+    window.addEventListener("scroll", () => {
+      navbarJS().then((res) => {
+        result = res;
+        if (windowWidth > 1200) return;
+        if (res > 1) {
+          this.$refs.itemWrap.classList.add("current");
+        } else {
+          this.$refs.itemWrap.classList.remove("current");
+        }
+      });
+    });
   },
   components: {
     SearchList,
@@ -78,12 +106,18 @@ export default {
 };
 </script>
 <style scoped>
+.nav_item {
+  width: 100%;
+  height: 72px;
+  background-color: #fff;
+  border-bottom: 1px solid #999;
+}
+
 .item_wrap {
   display: flex;
   justify-content: center;
-  height: 72px;
+  height: 100%;
   margin-bottom: 0 !important;
-  border-bottom: 1px solid #999;
   transform: translateY(-100%);
   animation: move 1s linear forwards;
   animation-delay: 1000ms;
@@ -141,6 +175,22 @@ input {
   }
   100% {
     transform: translateY(0%);
+  }
+}
+
+/* current */
+.current {
+  justify-content: flex-end;
+  padding-right: 25px;
+}
+
+/* 992 */
+@media screen and (max-width: 992px) {
+  .nav_item {
+    height: 0;
+  }
+  .item_wrap {
+    display: none;
   }
 }
 </style>

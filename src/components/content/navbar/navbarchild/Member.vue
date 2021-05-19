@@ -1,15 +1,38 @@
 <template>
-  <div class="member_list">
-    <div><a href="">會員資料</a></div>
-    <div>
-      <a
-        :href="`/wishlist/${userId}`"
-        @click="goWishList"
-        @mouseover="pushUserId"
-        >Wish List</a
-      >
+  <div class="memberlist_wrap">
+    <!-- normal start -->
+    <div class="member_list">
+      <div class="member_item"><a href="">會員資料</a></div>
+      <div class="wishlist_item">
+        <a
+          :href="`/wishlist/${userId}`"
+          @click="goWishList"
+          @mouseover="pushUserId"
+          >Wish List</a
+        >
+      </div>
+      <div class="logout_item"><a href="/logout" @click="logout">登出</a></div>
     </div>
-    <div><a href="/logout" @click="logout">登出</a></div>
+    <!-- normal end -->
+
+    <!-- 992px start -->
+    <div class="member_list_m">
+      <div class="item_wrap">
+        <a href="javascript:;" @click="goMember">會員資料</a>
+      </div>
+      <div class="item_wrap">
+        <a
+          :href="`/wishlist/${userId}`"
+          @click="goWishList"
+          @mouseover="pushUserId"
+          >Wish List</a
+        >
+      </div>
+      <div class="item_wrap">
+        <a href="/logout" @click="logout('refresh')">登出</a>
+      </div>
+    </div>
+    <!-- 992px end -->
   </div>
 </template>
 <script>
@@ -24,13 +47,13 @@ export default {
     };
   },
   methods: {
-    logout() {
+    logout(status) {
       event.preventDefault();
       const user = JSON.parse(localStorage.getItem("login")).account;
       const cartList = this.$store.state.cartList;
       this.$store.commit("logout", []);
       logOut(cartList, user);
-      this.$emit("Logout");
+      this.$emit("Logout", status);
     },
     pushUserId() {
       const userid = JSON.parse(localStorage.getItem("login")).account;
@@ -38,7 +61,11 @@ export default {
     },
     goWishList() {
       event.preventDefault();
+      this.$bus.$emit("mobileList");
       this.$router.push(`/wishlist/${this.userId}`);
+    },
+    goMember() {
+      this.$bus.$emit("mobileList");
     },
   },
 };
@@ -57,11 +84,15 @@ export default {
   z-index: 9999;
 }
 
-.member_list .div {
+.member_list .member_item,
+.member_list .wishlist_item,
+.member_list .logout_item {
   flex: 1;
 }
 
-.member_list div a {
+.member_list .member_item a,
+.member_list .wishlist_item a,
+.member_list .logout_item a {
   display: inline-block;
   width: 100%;
   height: 100%;
@@ -70,8 +101,27 @@ export default {
   color: #646565;
 }
 
-.member_list div a:hover {
+.member_list .member_item a:hover,
+.member_list .wishlist_item a:hover,
+.member_list .logout_item a:hover {
   color: #646565 !important;
   text-decoration: underline !important;
+}
+
+.member_list_m .item_wrap {
+  height: 40px;
+  line-height: 40px;
+}
+
+.member_list_m .item_wrap a {
+  text-decoration: none;
+  color: #fff !important;
+}
+
+/* 992px */
+@media screen and (max-width: 992px) {
+  .member_list {
+    display: none;
+  }
 }
 </style>

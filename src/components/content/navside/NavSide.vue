@@ -3,19 +3,19 @@
     <div class="nav_side">
       <div class="first_activity">
         <h4 class="title">最新活動 -</h4>
-        <div><a href="">清倉大拍賣 全面9折</a></div>
-        <div><a href="">2021年必備款式</a></div>
-        <div><a href="">超夯人氣款TOP10</a></div>
-        <div><a href="">BASIC百搭 日常單品</a></div>
+        <div><a href="javascript:;">清倉大拍賣 全面9折</a></div>
+        <div><a href="javascript:;">2021年必備款式</a></div>
+        <div><a href="javascript:;">超夯人氣款TOP10</a></div>
+        <div><a href="javascript:;">BASIC百搭 日常單品</a></div>
       </div>
       <div class="sort">
         <h4 class="title">商品分類 -</h4>
-        <div><a href="">Top上衣</a></div>
-        <div><a href="">Bottom下身</a></div>
-        <div><a href="">Dress洋裝</a></div>
-        <div><a href="">Outer外套</a></div>
-        <div><a href="">Accessories飾品</a></div>
-        <div><a href="">Shoes/Bags鞋包</a></div>
+        <div><a href="javascript:;">Top上衣</a></div>
+        <div><a href="javascript:;">Bottom下身</a></div>
+        <div><a href="javascript:;">Dress洋裝</a></div>
+        <div><a href="javascript:;">Outer外套</a></div>
+        <div><a href="javascript:;">Accessories飾品</a></div>
+        <div><a href="javascript:;">Shoes/Bags鞋包</a></div>
       </div>
     </div>
   </div>
@@ -29,11 +29,12 @@ export default {
 /* nav_side */
 .nav_wrap {
   position: sticky;
-  top: 140px;
+  top: 120px;
 }
 
 .nav_list .title {
   font-size: 16px;
+  margin: 0 0 10px !important;
 }
 
 .first_activity div,
@@ -45,5 +46,10 @@ export default {
 
 .sort {
   margin-top: 20px;
+}
+
+.nav_side .first_activity div a,
+.nav_side .sort div a {
+  text-decoration: none;
 }
 </style>

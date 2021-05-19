@@ -151,10 +151,6 @@ export default {
   position: relative;
 }
 
-/* .cart {
-  position: relative;
-} */
-
 .login a,
 .logout a,
 .cart a {
@@ -179,5 +175,12 @@ export default {
 
 .account div:hover a {
   color: var(--color-hover) !important;
+}
+
+/* 992 */
+@media screen and (max-width: 992px) {
+  .service {
+    display: none;
+  }
 }
 </style>

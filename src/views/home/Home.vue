@@ -1,30 +1,31 @@
 <template>
   <div id="Home">
-    <banner :bannerImg="bannerImg" />
+    <banner :bannerImg="bannerImg" v-if="isShow" />
+    <banner :bannerImg="bannerImg_m" v-else />
     <div class="exhibit">
       <div>
-        <a href=""
+        <a href="javascript:;"
           ><img src="@/assets/img/homeimg1.jpg" alt="" class="exhibit_img"
         /></a>
       </div>
       <div>
-        <a href=""
+        <a href="javascript:;"
           ><img src="@/assets/img/homeimg2.jpg" alt="" class="exhibit_img"
         /></a>
       </div>
       <div>
-        <a href=""
+        <a href="javascript:;"
           ><img src="@/assets/img/homeimg3.jpg" alt="" class="exhibit_img"
         /></a>
       </div>
       <div>
-        <a href=""
+        <a href="javascript:;"
           ><img src="@/assets/img/homeimg4.jpg" alt="" class="exhibit_img"
         /></a>
       </div>
     </div>
     <div class="adv_wrap" ref="advWrap">
-      <a href=""> <img :src="advImg" alt="" @load="getY" /></a>
+      <a href="javascript:;"> <img :src="advImg" alt="" @load="getY" /></a>
     </div>
   </div>
 </template>
@@ -43,7 +44,9 @@ export default {
   data() {
     return {
       bannerImg: [],
+      bannerImg_m: [],
       advImg: "",
+      isShow: null,
     };
   },
   components: {
@@ -53,6 +56,7 @@ export default {
     getHomeData()
       .then((res) => {
         this.bannerImg = res.data[0].bannerImg;
+        this.bannerImg_m = res.data[0].bannerImg_m;
         this.advImg = res.data[0].advImg;
       })
       .catch((err) => console.log("err"));
@@ -60,6 +64,14 @@ export default {
   activated() {
     window.scroll(0, 0);
     document.title = this.$route.meta.title;
+  },
+  mounted() {
+    let WindowWidth = window.innerWidth;
+    WindowWidth > 992 ? (this.isShow = true) : (this.isShow = false);
+    window.addEventListener("resize", () => {
+      WindowWidth = window.innerWidth;
+      WindowWidth > 992 ? (this.isShow = true) : (this.isShow = false);
+    });
   },
   methods: {
     getY() {
@@ -120,6 +132,11 @@ export default {
   opacity: 0;
 }
 
+.adv_wrap img {
+  width: 100%;
+  height: 100%;
+}
+
 /* current */
 .current {
   animation: show 1s linear forwards;
@@ -131,6 +148,45 @@ export default {
   }
   100% {
     opacity: 1;
+  }
+}
+
+/* 992px */
+@media screen and (max-width: 992px) {
+  #Home {
+    padding: 50px;
+  }
+}
+
+/* 767px */
+@media screen and (max-width: 767px) {
+  #Home {
+    padding: 10px 20px;
+  }
+
+  .exhibit {
+    flex-wrap: wrap;
+  }
+
+  .exhibit div {
+    flex: 45%;
+    margin: 0 0 20px 0;
+  }
+
+  .exhibit div:nth-child(2n-1) {
+    margin-right: 20px;
+  }
+
+  .exhibit div .exhibit_img {
+    transition: initial;
+  }
+
+  .exhibit div .exhibit_img:hover {
+    transform: initial;
+    opacity: initial;
+  }
+  .adv_wrap {
+    margin-top: 10px;
   }
 }
 </style>
